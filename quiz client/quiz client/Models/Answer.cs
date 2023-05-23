@@ -18,6 +18,13 @@ namespace quiz_client.Models
             _correct = correct;
         }
 
+        public Answer(string content, string correct)
+        {
+            _content = content;
+            if (correct == "y") _correct = true;
+            else _correct = false;
+        }
+
         public string Content { get => _content; set => _content = value; }
         public bool Correct { get => _correct; set => _correct = value; }
 

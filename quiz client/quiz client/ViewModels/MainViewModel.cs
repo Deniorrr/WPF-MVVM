@@ -1,5 +1,5 @@
-﻿using Microsoft.Data.Sqlite;
-using quiz_client.Models;
+﻿using quiz_client.Models;
+using quiz_client.Stores;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +10,26 @@ namespace quiz_client.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        public ViewModelBase CurrentViewModel { get; set; }
+        private NavigationStore _navigationStore;
 
-        public MainViewModel(Quiz quiz)
+        public ViewModelBase CurrentViewModel => _navigationStore.CurrentViewModel;
+
+        public MainViewModel(NavigationStore navigationStore)
         {
-            CurrentViewModel = new SolveQuizViewModel(quiz);
-            DataBaseAccess.ReadData();
+            _navigationStore = navigationStore;
+
+            _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged; ;
         }
+
+        private void OnCurrentViewModelChanged()
+        {
+            OnPropertyChanged(nameof(CurrentViewModel));
+        }
+
+
+        //public MainViewModel(Quiz quiz)
+        //{
+        //    CurrentViewModel = new SolveQuizViewModel(quiz);
+        //}
     }
 }

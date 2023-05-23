@@ -243,6 +243,7 @@ namespace quiz_client.ViewModels
         public ICommand EndQuizCommand { get; set; }
         public ICommand PreviousQuestionCommand { get; set; }
 
+        
 
         public void QuestionsAdd(Question question, int id)
         {
@@ -261,17 +262,36 @@ namespace quiz_client.ViewModels
             //aTimer.Enabled = true;
             aTimer.Stop();
         }
-        public SolveQuizViewModel(Quiz quiz)
+
+        private void prepareTimer()
         {
             aTimer.Interval = 1000;
             aTimer.Elapsed += addSecond;
             aTimer.Elapsed += updateTime;
             aTimer.AutoReset = true;
+        }
+
+        public void displayFirstQuestion(Quiz quiz)
+        {
+            Question currentQuestion = quiz.GetQuestion();
+            resetAnswers(currentQuestion.UserAnswer1, currentQuestion.UserAnswer2, currentQuestion.UserAnswer3, currentQuestion.UserAnswer4);
+            ActiveQuestion = currentQuestion.question;
+            ActiveAnswer1 = currentQuestion.Answer1.Content;
+            ActiveAnswer2 = currentQuestion.Answer2.Content;
+            ActiveAnswer3 = currentQuestion.Answer3.Content;
+            ActiveAnswer4 = currentQuestion.Answer4.Content;
+        }
+
+        public SolveQuizViewModel(Quiz quiz)
+        {
+            displayFirstQuestion(quiz);
+            prepareTimer();
+            startTimer();
             _quizTitle = quiz.Name;
             _questions = new ObservableCollection<QuestionViewModel>();
             NextQuestionCommand = new NextQuestionCommand(this, quiz);
             PreviousQuestionCommand = new PreviousQuestionCommand(this, quiz);
-            StartQuizCommand = new StartQuizCommand(this, quiz);
+            //StartQuizCommand = new StartQuizCommand(this, quiz);
             EndQuizCommand = new EndQuizCommand(this, quiz);
         }
     }
