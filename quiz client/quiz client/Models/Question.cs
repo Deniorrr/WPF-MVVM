@@ -20,10 +20,8 @@ namespace quiz_client.Models
         private bool userAnswer4;
 
 
-        //private List<Answer> _answers = new List<Answer> (new Answer[4]);
 
         public string question { get => _question; set => _question = value; }
-        //public List<Answer> Answers { get => _answers; set => _answers = value; }
         public Answer Answer1 { get => answer1; set => answer1 = value; }
         public Answer Answer2 { get => answer2; set => answer2 = value; }
         public Answer Answer3 { get => answer3; set => answer3 = value; }
@@ -59,10 +57,7 @@ namespace quiz_client.Models
             if (answer4.Correct != userAnswer4) return false;
             return true;
         }
-        //public string getAnswers()
-        //{
-        //    return []
-        //}
+
     }
 
 }

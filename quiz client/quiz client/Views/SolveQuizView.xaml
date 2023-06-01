@@ -21,7 +21,7 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-        <TextBlock Text="{Binding ActiveQuestion}" Grid.Column="1" Grid.Row="0" Padding="20px" FontSize="20px"/>
+        <TextBlock Text="{Binding ActiveQuestion}" Grid.Column="1" Grid.Row="0" Padding="20px" FontSize="20px" TextWrapping="Wrap"/>
         <TextBlock Text="{Binding ActiveAnswer1}" Grid.Column="1" Grid.Row="1"/>
         <TextBlock Text="{Binding ActiveAnswer2}" Grid.Column="1" Grid.Row="2"/>
         <TextBlock Text="{Binding ActiveAnswer3}" Grid.Column="1" Grid.Row="3"/>
@@ -33,36 +33,6 @@
         <Button Grid.Column="2" Grid.Row="5" Command="{Binding NextQuestionCommand}" IsEnabled="{Binding NextButtonEnabled}">next question</Button>
         <Button Grid.Column="0" Grid.Row="5" Command="{Binding PreviousQuestionCommand}" IsEnabled="{Binding PreviousButtonEnabled}">Previous question</Button>
         <Button Grid.Column="3" Grid.Row="5" Command="{Binding EndQuizCommand}">end quiz</Button>
-        <TextBlock Visibility="{Binding EndVisibility}" Grid.RowSpan="6" Grid.ColumnSpan="4" Background="White"/>
         <TextBlock Text="{Binding QuizTime}" Grid.Column="3" TextAlignment="Center" FontSize="15px" Padding="0 30px"/>
-        <!--<TextBlock Visibility="{Binding StartVisibility}" Grid.RowSpan="6" Grid.ColumnSpan="4" Text="{Binding QuizTitle}" Background="White" FontSize="30px" Padding="30px 60px"/>
-        <Button Visibility="{Binding StartVisibility}" Name="StartQuiz" Command="{Binding StartQuizCommand}" Grid.Column="2" FontSize="15px">Start quiz</Button>-->
-        <ListView Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="3" Visibility="{Binding EndVisibility}" ItemsSource="{Binding Questions}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Nr." >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Id}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Correct" >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Correct}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="question" >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding question}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
     </Grid>
 </UserControl>

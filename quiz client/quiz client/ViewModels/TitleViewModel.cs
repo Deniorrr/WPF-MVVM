@@ -12,7 +12,7 @@ namespace quiz_client.ViewModels
 {
     internal class TitleViewModel : ViewModelBase
     {
-        private string _title = "XD";
+        private string _title = "";
         public string Title
         {
             get
@@ -30,14 +30,13 @@ namespace quiz_client.ViewModels
         public IEnumerable<QuizListViewModel> Quizes => _quizes;
 
         private int _selectedItem = 0;
-        private int _selectedQuizId = 1;
+        private int _selectedQuizId;
         private string _selectedQuizName;
         
         public int SelectedItem { get => _selectedItem;
             set
             {
                 Console.Write(value);
-                //string XD = _quizes[value].Name;
                 SelectedQuizId = _quizes[value].Id;
                 SelectedQuizName = _quizes[value].Name;
                 _selectedItem = value;
@@ -52,6 +51,8 @@ namespace quiz_client.ViewModels
         {
             _quizes = new ObservableCollection<QuizListViewModel>();
             DataBaseAccess.ReadQuizes(_quizes);
+            SelectedQuizId = _quizes[_selectedItem].Id;
+            SelectedQuizName = _quizes[_selectedItem].Name;
             StartQuizCommand = new StartQuizCommand(navigationStore, this);
         }
     }

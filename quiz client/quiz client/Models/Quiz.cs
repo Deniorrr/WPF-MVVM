@@ -56,5 +56,10 @@ namespace quiz_client.Models
             if(_questionId == 0) return true;
             return false;
         }
+        public bool IsEmpty()
+        {
+            if (_questions.Count == 0) return true;
+            return false;
+        }
     }
 }

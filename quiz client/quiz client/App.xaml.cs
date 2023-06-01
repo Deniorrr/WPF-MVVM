@@ -1,4 +1,5 @@
 ﻿using quiz_client.Models;
+using quiz_client.Stores;
 using quiz_client.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -16,20 +17,23 @@ namespace quiz_client
     public partial class App : Application
     {
         private Quiz _quiz;
+        private NavigationStore _navigationStore;
+
 
         public App()
         {
-            //Tu będzie kiedyś wczytanie quizu z bazy danych
-            _quiz = new Quiz(1,"jeden quiz");
-            _quiz.addQuestion(new Question("pytanko1", new Answer("odp1", false), new Answer("odp2", true), new Answer("odp3", false), new Answer("odp4", false)));
-            _quiz.addQuestion(new Question("pytanko2", new Answer("odp5", true), new Answer("odp6", false), new Answer("odp7", false), new Answer("odp8", false)));
+            _navigationStore = new NavigationStore();
         }   
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            
+            
+            //_navigationStore.CurrentViewModel = new SolveQuizViewModel(_quiz);
+            _navigationStore.CurrentViewModel = new TitleViewModel(_navigationStore);
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel(_quiz)
+                DataContext = new MainViewModel(_navigationStore)
             };
             MainWindow.Show();
 

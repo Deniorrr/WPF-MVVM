@@ -4,9 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:quiz_client.Views"
+        xmlns:vms="clr-namespace:quiz_client.ViewModels"
         mc:Ignorable="d"
         Title="Quiz solver" Height="450" Width="800">
     <Grid>
-        <views:SolveQuizView DataContext="{Binding CurrentViewModel}"/>
+        <Grid.Resources>
+            <DataTemplate DataType="{x:Type vms:SolveQuizViewModel}">
+                <views:SolveQuizView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:TitleViewModel}">
+                <views:TitleView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:ResultViewModel}">
+                <views:ResultView/>
+            </DataTemplate>
+        </Grid.Resources>
+        <ContentControl Content="{Binding CurrentViewModel}"/>
+
+        <!--<views:SolveQuizView DataContext="{Binding CurrentViewModel}"/>-->
     </Grid>
 </Window>

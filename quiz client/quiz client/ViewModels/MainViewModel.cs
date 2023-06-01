@@ -26,10 +26,5 @@ namespace quiz_client.ViewModels
             OnPropertyChanged(nameof(CurrentViewModel));
         }
 
-
-        //public MainViewModel(Quiz quiz)
-        //{
-        //    CurrentViewModel = new SolveQuizViewModel(quiz);
-        //}
     }
 }

@@ -9,6 +9,8 @@ namespace quiz_client.Models
 {
     class Encrypter
     {
+        // Szyfrowanie tekstóe czyli pytań i odpowiedzi to szyfr cezara z przesunięciem o 10 liter
+        // Szyfrowanie boola to zrobienie (!odpowiedź) jeśli pierwsza litera pytania zawiera się w stringu "QWERTYUIOPZXCVBNqwertyuiopzxcvbn"
         public static string Encrypt(string message, int key)
         {
             string encryptedMessage = "";
@@ -42,8 +44,6 @@ namespace quiz_client.Models
             return Decrypt(encryptedMessage, 10);
         }
 
-        // Rozszyfrowywanie odpowiedzi: jeśli pierwsza litera ZASZYFROWANEGO CONTENTU ODPOWIEDZI to parzysta liczba to neguj odpowiedź
-        // W argumentach funkcji podajesz najpierw EncryptedQuestionContent a potem questionAnswer
         public static bool DecryptAnswerBool(string answerContent, string answerAnswer)
         {
             bool finalValue;

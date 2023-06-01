@@ -31,32 +31,7 @@ namespace quiz_client.ViewModels
                 OnPropertyChanged(nameof(ActiveQuestion));
             }
         }
-        private string _startVisibility = "Visible";
-        public string StartVisibility
-        {
-            get
-            {
-                return _startVisibility;
-            }
-            set
-            {
-                _startVisibility = value;
-                OnPropertyChanged(nameof(StartVisibility));
-            }
-        }
-        private string _endVisibility = "Collapsed";
-        public string EndVisibility
-        {
-            get
-            {
-                return _endVisibility;
-            }
-            set
-            {
-                _endVisibility = value;
-                OnPropertyChanged(nameof(EndVisibility));
-            }
-        }
+
         private string _activeAnswer1;
         public string ActiveAnswer1
         {
@@ -233,12 +208,12 @@ namespace quiz_client.ViewModels
         }
         private IEnumerable<Question> _list;
 
-        private ObservableCollection<QuestionViewModel> _questions;
+        public ObservableCollection<QuestionViewModel> _questions;
 
-        public IEnumerable<QuestionViewModel> Questions => _questions;
+        //public IEnumerable<QuestionViewModel> Questions => _questions;
 
         public ICommand NextQuestionCommand { get; set; }
-        public ICommand StartQuizCommand { get; set; }
+        //public ICommand StartQuizCommand { get; set; }
 
         public ICommand EndQuizCommand { get; set; }
         public ICommand PreviousQuestionCommand { get; set; }
@@ -259,7 +234,6 @@ namespace quiz_client.ViewModels
 
         public void stopTimer()
         {
-            //aTimer.Enabled = true;
             aTimer.Stop();
         }
 
@@ -282,7 +256,7 @@ namespace quiz_client.ViewModels
             ActiveAnswer4 = currentQuestion.Answer4.Content;
         }
 
-        public SolveQuizViewModel(Quiz quiz)
+        public SolveQuizViewModel(Quiz quiz, Stores.NavigationStore navigationStore)
         {
             displayFirstQuestion(quiz);
             prepareTimer();
@@ -291,8 +265,7 @@ namespace quiz_client.ViewModels
             _questions = new ObservableCollection<QuestionViewModel>();
             NextQuestionCommand = new NextQuestionCommand(this, quiz);
             PreviousQuestionCommand = new PreviousQuestionCommand(this, quiz);
-            //StartQuizCommand = new StartQuizCommand(this, quiz);
-            EndQuizCommand = new EndQuizCommand(this, quiz);
+            EndQuizCommand = new EndQuizCommand(this, quiz, navigationStore, QuizTime);
         }
     }
 }

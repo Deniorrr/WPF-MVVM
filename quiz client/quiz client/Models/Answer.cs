@@ -28,10 +28,6 @@ namespace quiz_client.Models
         public string Content { get => _content; set => _content = value; }
         public bool Correct { get => _correct; set => _correct = value; }
 
-        //public string getAnswerContent()
-        //{
-        //    return _content;
-        //}
     }
 
 }
